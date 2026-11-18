@@ -38,6 +38,8 @@ body > main {
   --mark: light-dark(#bd502f, #f2a585);
   --ok: light-dark(#e3f1e8, #2d4838);
   --oktxt: light-dark(#25523d, #bedac8);
+  --warn: light-dark(#fbe4dc, #4a2b22);
+  --warntxt: light-dark(#8a2e12, #f6c4ae);
   background: var(--paper);
   color: var(--ink);
   font:
@@ -308,6 +310,74 @@ body > main {
 }
 #campus-stores textarea {
   resize: vertical;
+}
+#campus-stores .warn {
+  background: var(--warn);
+  color: var(--warntxt);
+}
+#campus-stores .checkin {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  gap: 4px 8px;
+  margin: 0 0 10px;
+}
+#campus-stores .checkin label {
+  flex: 1 1 160px;
+  max-width: 280px;
+  font-size: 13px;
+  font-weight: 600;
+}
+#campus-stores .checkin label span {
+  margin-bottom: 3px;
+}
+#campus-stores .checkin input {
+  width: 100%;
+  font-weight: 400;
+  letter-spacing: 0.04em;
+}
+#campus-stores .checkin small {
+  flex-basis: 100%;
+}
+#campus-stores .alert {
+  margin: 0 0 10px;
+  padding: 9px 12px;
+  border-radius: 6px;
+  background: var(--warn);
+  color: var(--warntxt);
+}
+#campus-stores .record.found,
+#campus-stores .record.prompt {
+  margin: 0 0 12px;
+}
+#campus-stores .record.prompt {
+  border-left-color: var(--mark);
+}
+#campus-stores .record .buttons {
+  margin-bottom: 0;
+}
+#campus-stores .row small.handover,
+#campus-stores .record .handover {
+  color: var(--memotxt);
+  font-weight: 600;
+}
+#campus-stores fieldset {
+  border: 0;
+  margin: 8px 0 0;
+  padding: 0;
+  display: grid;
+  gap: 4px;
+}
+#campus-stores legend {
+  font-size: 13px;
+  font-weight: 600;
+  padding: 0;
+  margin-bottom: 3px;
+}
+#campus-stores .check {
+  display: flex;
+  align-items: center;
+  gap: 8px;
 }
 #campus-stores .statusbar {
   background: var(--desk);
