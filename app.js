@@ -89,8 +89,13 @@
     ["Loan register", "book-open"],
     ["Desk book", "messages-square"],
   ];
-  // Hours from the start of Friday, so return times can be compared with desk time.
-  const hours = { "Fri 8 pm": 20, "Sat 9 am": 33, "Sat 10 am": 34, "Sat noon": 36 };
+  // Hours from the start of Friday, so return times compare with desk time.
+  const hours = {
+    "Fri 8 pm": 20,
+    "Sat 9 am": 33,
+    "Sat 10 am": 34,
+    "Sat noon": 36,
+  };
   const deskHours = [15.75, 19.5, 33];
   const returnTimes = Object.keys(hours);
   const original = () => ({
@@ -233,15 +238,19 @@
       ) +
       "</select></label></div>";
     for (const a of assets) {
+      const l = out(a.id);
       const status = a.repair
         ? "In repair"
-        : out(a.id)
+        : l
           ? "On loan"
           : "On shelf";
       if (s.filter !== "All items" && s.filter !== status) continue;
       html += row(
         a.id + " · " + a.type,
-        a.model + " · " + a.bin,
+        a.model +
+          " · " +
+          a.bin +
+          (l ? " · L-" + l.num + " · With " + (l.holder || l.who) : ""),
         badge(status, status === "On shelf"),
       );
     }
@@ -321,8 +330,7 @@
     const r = getReq(l.req);
     let detail = "";
     if (l.back && l.backBy)
-      detail =
-        "Returned by " + l.backBy + " · " + shifts[l.backPhase].time;
+      detail = "Returned by " + l.backBy + " · " + shifts[l.backPhase].time;
     else if (!l.back && l.holder)
       detail =
         "Now with " +
@@ -333,10 +341,16 @@
       '<div class="row"><div><strong>' +
       esc("L-" + l.num + " · " + unitName(l.asset)) +
       "</strong><small>" +
-      esc(r.id + " · " + r.club + " · Issued to " + l.who + " · Due " + l.due) +
+      esc(
+        r.id + " · " + r.club + " · Issued to " + l.who + " · Due " + l.due,
+      ) +
       "</small>" +
       (detail
-        ? '<small class="' + (l.back ? "" : "handover") + '">' + esc(detail) + "</small>"
+        ? '<small class="' +
+          (l.back ? "" : "handover") +
+          '">' +
+          esc(detail) +
+          "</small>"
         : "") +
       "</div><div>" +
       (l.back
